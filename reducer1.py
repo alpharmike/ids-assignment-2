@@ -4,7 +4,7 @@
 import sys
 
 current_exec_id = None
-current_timestamp = 0
+current_timestamp = 0.0
 current_activity = 0
 exec_id = None
 
@@ -18,7 +18,7 @@ for line in sys.stdin:
 
     # convert count (currently a string) to int
     try:
-        timestamp = int(timestamp)
+        timestamp = float(timestamp)
     except ValueError:
         # count was not a number, so silently
         # ignore/discard this line
@@ -33,11 +33,11 @@ for line in sys.stdin:
     else:
         if current_exec_id:
             # write result to STDOUT
-            print(f'{current_exec_id}\t{current_activity}\t{current_timestamp}')
+            print('%s\t%s\t%s' % (current_exec_id, current_activity, current_timestamp))
         current_timestamp = timestamp
         current_exec_id = exec_id
         current_activity = activity
 
 # do not forget to output the last word if needed!
 if current_exec_id == exec_id:
-    print(f'{current_exec_id}\t{current_activity}\t{current_timestamp}')
+    print('%s\t%s\t%s' % (current_exec_id, current_activity, current_timestamp))

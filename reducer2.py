@@ -2,7 +2,7 @@
 import sys
 
 current_activity = 0
-current_mean = 0
+current_mean = 0.0
 current_total = 0
 activity = None
 
@@ -16,7 +16,7 @@ for line in sys.stdin:
 
     # convert count (currently a string) to int
     try:
-        exec_time = int(exec_time)
+        exec_time = float(exec_time)
     except ValueError:
         # count was not a number, so silently
         # ignore/discard this line
@@ -31,11 +31,11 @@ for line in sys.stdin:
     else:
         if current_activity:
             # write result to STDOUT
-            print(f'{current_activity}\t{current_mean}')
+            print('%s\t%s' % (current_activity, current_mean))
         current_mean = exec_time
         current_activity = activity
         current_total = 1
 
 # do not forget to output the last word if needed!
 if current_activity == activity:
-    print(f'{current_activity}\t{current_mean}')
+    print('%s\t%s' % (current_activity, current_mean))
